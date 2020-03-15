@@ -1,15 +1,19 @@
 
 import tkinter as tk
-from math import pi as π, sqrt,degrees,radians,sin,cos,tan,log10 as Log
-
+from math import pi as π, sqrt, degrees, radians, sin, cos, tan, log10 as Log
 
 
 def SIN(x):
     return eval(f'{sin(radians(x)):.3f}')
+
+
 def COS(x):
     return eval(f'{cos(radians(x)):.3f}')
+
+
 def TAN(x):
     return eval(f'{tan(radians(x)):.3f}')
+
 
 '''add degre/radian radial button later for added complexity'''
 
@@ -18,20 +22,22 @@ class Calc:
     '''equals for button with handled execptions'''
 
     def equals_(self):
-        self.historyadd=''
+        self.historyadd = ''
         try:
-            if self.hisotryDisplay.get()=='':
+            if self.hisotryDisplay.get() == '':
                 pass
             else:
-                self.historyadd=self.hisotryDisplay.get()
+                self.historyadd = self.hisotryDisplay.get()
 
-            if self.entry.get()=='':
+            if self.entry.get() == '':
                 pass
-            elif self.historyadd=='':
+            elif self.historyadd == '':
                 self.expressionDisplay.set(self.entry.get())
-                self.hisotryDisplay.set(f'{self.entry.get()} : {eval(self.expressionDisplay.get())}')
+                self.hisotryDisplay.set(
+                    f'{self.entry.get()} : {eval(self.expressionDisplay.get())}')
             else:
-                self.hisotryDisplay.set(f'{self.hisotryDisplay.get()}\n{self.entry.get()} : {eval(self.entry.get())}')
+                self.hisotryDisplay.set(
+                    f'{self.hisotryDisplay.get()}\n{self.entry.get()} : {eval(self.entry.get())}')
                 # self.hisotryDisplay.set(f'{self.expressionDisplay.get()}: {self.outputDisplay.get()}')
             self.expressionDisplay.set(self.entry.get())
             self.outputDisplay.set(f'{eval(self.entry.get())}')
@@ -39,7 +45,7 @@ class Calc:
         except ZeroDivisionError:
             self.expressionDisplay.set('Cannot divide by zero')
         except SyntaxError:
-            if self.entry.get()=='':
+            if self.entry.get() == '':
                 pass
             else:
                 self.expressionDisplay.set(SyntaxError.__name__)
@@ -47,13 +53,12 @@ class Calc:
             self.expressionDisplay.set('ValueError')
         '''new history to add to new line function'''
 
-
     def clear(self):
         self.expressionDisplay.set('')
         self.entry.delete(0, 'end')
-    
+
     def reset(self):
-        self.master_window.after(0000)#millisecond
+        self.master_window.after(0000)  # millisecond
         self.expressionDisplay.set('')
         self.outputDisplay.set('')
         self.hisotryDisplay.set('')
@@ -67,16 +72,20 @@ class Calc:
         self.outputDisplay = tk.StringVar()  # shows results on entry field
         self.hisotryDisplay = tk.StringVar()
         '''history frame and contents'''
-        tk.Button(self.master_window,text='reset',command=lambda:eval(f'{self.reset()}')).pack()
-        self.historyframe=tk.Frame(self.master_window)
+        tk.Button(self.master_window, text='reset',
+                  command=lambda: eval(f'{self.reset()}')).pack()
+        self.historyframe = tk.Frame(self.master_window)
         self.historyframe.pack(side='left')
-        self.historylabel=tk.Label(self.historyframe,text='History').pack(side='top')
-        self.historycontent=tk.Label(self.historyframe,textvariable=self.hisotryDisplay).pack(side='bottom')
+        self.historylabel = tk.Label(
+            self.historyframe, text='History').pack(side='top')
+        self.historycontent = tk.Label(
+            self.historyframe, textvariable=self.hisotryDisplay).pack(side='bottom')
         # self.hisotryDisplay.set('hello world')
         '''creating frames'''
 
         self.expressionframe = tk.Frame(self.master_window)
-        self.label = tk.Label(self.expressionframe, justify='right',textvariable=self.expressionDisplay)
+        self.label = tk.Label(
+            self.expressionframe, justify='right', textvariable=self.expressionDisplay)
         self.label.pack()  # padx=10,pady=10
         self.expressionframe.pack()
 
@@ -87,7 +96,8 @@ class Calc:
         self.entryframe.pack()
 
         self.frame2 = tk.Frame(self.master_window)
-        self.C = tk.Button(self.frame2, text='C', command=lambda: self.clear(), width=16).pack(side='left')
+        self.C = tk.Button(
+            self.frame2, text='C', command=lambda: self.clear(), width=16).pack(side='left')
         self.plus = tk.Button(
             self.frame2, text='+', command=lambda: self.entry.insert('end', '+'), width=5).pack(side='left')
         self.frame2.pack()
@@ -161,15 +171,21 @@ class Calc:
             'end', 'π'), width=4).pack(side='left')
         self.frame7.pack()
         '''end frames'''
-        self.frame8=tk.Frame(self.master_window)
-        self.sine=tk.Button(self.frame8,text='SIN',width=4,command=lambda:self.entry.insert('end','SIN(')).pack(side='left')
-        self.cosine=tk.Button(self.frame8,text='COS',width=4,command=lambda:self.entry.insert('end','COS(')).pack(side='left')
-        self.tangent=tk.Button(self.frame8,text='TAN',width=4,command=lambda:self.entry.insert('end','TAN(')).pack(side='left')
-        self.absValue=tk.Button(self.frame8,text='|x|',width=4,command=lambda:self.entry.insert('end','abs(')).pack(side='left')
-        self.log_=tk.Button(self.frame8,text='LOG',width=4,command=lambda:self.entry.insert('end','Log(')).pack(side='left')
+        self.frame8 = tk.Frame(self.master_window)
+        self.sine = tk.Button(self.frame8, text='SIN', width=4, command=lambda: self.entry.insert(
+            'end', 'SIN(')).pack(side='left')
+        self.cosine = tk.Button(self.frame8, text='COS', width=4, command=lambda: self.entry.insert(
+            'end', 'COS(')).pack(side='left')
+        self.tangent = tk.Button(self.frame8, text='TAN', width=4, command=lambda: self.entry.insert(
+            'end', 'TAN(')).pack(side='left')
+        self.absValue = tk.Button(self.frame8, text='|x|', width=4, command=lambda: self.entry.insert(
+            'end', 'abs(')).pack(side='left')
+        self.log_ = tk.Button(self.frame8, text='LOG', width=4, command=lambda: self.entry.insert(
+            'end', 'Log(')).pack(side='left')
         self.frame8.pack()
 
         self.master_window.mainloop()  # enter tkinter mainloop
 
 
 calc = Calc()
+#
