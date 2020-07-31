@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 import tkinter as tk
 from math import pi as π, sqrt, degrees, radians, sin, cos, tan, log10 as Log
 
